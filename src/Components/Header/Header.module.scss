@@ -9,19 +9,21 @@
 		max-width: $containerWidth;
 		margin: 0 auto;
 
+		@media screen and (max-width:1600px) {
+			max-width: 1200px;
 
+		}
 	}
 
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(12, 80px);
+		grid-template-columns: 200px 3fr 200px 1fr 200px;
 		align-items: center;
-		justify-content: space-between;
 
 
 
 		.storeName {
-			grid-column: 1/3;
+			grid-column: 1;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -40,7 +42,7 @@
 		.menu {
 			display: flex;
 			justify-content: space-between;
-			grid-column: 8/10;
+			grid-column: 3;
 			font-weight: 400;
 			font-size: 24px;
 
@@ -54,7 +56,7 @@
 
 		.cart {
 			background-color: $buttonBg;
-			grid-column: 11/13;
+			grid-column: 5;
 			border-radius: 62px;
 			padding: 8px 35px 7px 35px;
 			cursor: pointer;
@@ -63,6 +65,7 @@
 				display: flex;
 				justify-content: space-between;
 				position: relative;
+				align-items: center;
 
 				.cost {
 					font-weight: 400;
@@ -104,8 +107,8 @@
 			}
 
 			&:hover {
-				background-color: #c0171d;
-				;
+				background-color: $bgHover;
+
 
 			}
 		}

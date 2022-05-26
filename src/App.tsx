@@ -2,6 +2,7 @@ import React from 'react';
 import { collection, getDocs, onSnapshot, doc } from "firebase/firestore"
 import { db } from "./firebase"
 import Header from './Components/Header/Header';
+import PageContainer from './Components/PageContainer/PageContainer';
 function App() {
 	const pizzasRef = collection(db, "pizzas");
 
@@ -25,6 +26,7 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
+			<PageContainer />
 		</div>
 	);
 }
