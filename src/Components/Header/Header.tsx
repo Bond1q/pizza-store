@@ -23,10 +23,10 @@ const Header: FC = () => {
 				</div>
 				<div className={cn(st.cart)}>
 					<div className={st.flexContainer}>
-						<div className={cn(st.cost)}>10 $</div>
+						<div className={cn(st.cost)}>0 $</div>
 						<div className={cn(st.cartLogo)}>
 							<img src={cartLogo} alt="cart" />
-							<div className={st.productsCount}>5</div>
+							<div className={st.productsCount}>0</div>
 						</div>
 					</div>
 

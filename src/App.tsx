@@ -3,6 +3,9 @@ import { collection, getDocs, onSnapshot, doc } from "firebase/firestore"
 import { db } from "./firebase"
 import Header from './Components/Header/Header';
 import PageContainer from './Components/PageContainer/PageContainer';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import PizzasPage from './Pages/PizzasPage/PizzasPage';
+import DrinksPage from './Pages/DrinksPage/DrinksPage';
 function App() {
 	const pizzasRef = collection(db, "pizzas");
 
@@ -26,7 +29,11 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			<PageContainer />
+			<Routes>
+				<Route path='/pizzas' element={<PizzasPage />} />
+				<Route path='/drinks' element={<DrinksPage />} />
+				<Route path='/' element={<Navigate to={'/pizzas'} />} />
+			</Routes>
 		</div>
 	);
 }

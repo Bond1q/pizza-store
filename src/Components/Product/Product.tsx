@@ -1,12 +1,8 @@
 import React, { FC } from 'react';
 import st from './Product.module.scss'
 import cn from 'classnames'
-interface ProductProps {
-	img: string;
-	name: string;
-	ingradients?: string[];
-	price: number;
-}
+import { Product as ProductProps } from '../../types/products';
+
 
 const Product: FC<ProductProps> = ({ img, name, ingradients, price }) => {
 	const ingradientsList = ingradients?.map((ingradient, index) => <li key={index} >{ingradient}{index != ingradients?.length - 1 && ','}</li>);
