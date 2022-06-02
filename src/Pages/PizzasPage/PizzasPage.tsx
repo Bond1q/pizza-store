@@ -4,6 +4,7 @@ import { GetProductsTypes } from '../../types/products';
 import { useActions } from '../../utils/hooks/useActions';
 import PageContainer from './../../Components/PageContainer/PageContainer';
 import { useTypedSelector } from './../../utils/hooks/useTypedSelector';
+import { addProductToCard } from './../../redux/actionCreators/cartAction';
 
 const PizzasPage: FC = () => {
 	const { isLoading, products } = useTypedSelector(state => state.productsReducer)
@@ -11,15 +12,15 @@ const PizzasPage: FC = () => {
 	useEffect(() => {
 		getProducts(GetProductsTypes.PIZZAS)
 	}, [])
+
 	return (
-		<div>
+		<>
 			{
 				isLoading ? <Loader /> :
 					<PageContainer title='Pizzas' products={products} />
 
 			}
-
-		</div>
+		</>
 	);
 };
 

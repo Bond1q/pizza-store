@@ -4,6 +4,10 @@
 	background: $headerBg;
 	color: $headerText;
 	padding: 21px 0;
+	// position: fixed;
+	// top: 0;
+	// width: 100vw;
+	// z-index: 100;
 
 	.container {
 		max-width: $containerWidth;

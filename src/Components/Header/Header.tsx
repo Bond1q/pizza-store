@@ -4,8 +4,10 @@ import logo from '../../imgs/logo.png'
 import cartLogo from '../../imgs/carLogo.png'
 import st from '../Header/Header.module.scss'
 import cn from 'classnames';
+import { useTypedSelector } from './../../utils/hooks/useTypedSelector';
 
 const Header: FC = () => {
+	const { totalPrice, productsCount } = useTypedSelector(state => state.cartReducer)
 	return (
 		<header className={st.header}>
 			<div className={cn(st.container, st.grid)}>
@@ -23,10 +25,10 @@ const Header: FC = () => {
 				</div>
 				<div className={cn(st.cart)}>
 					<div className={st.flexContainer}>
-						<div className={cn(st.cost)}>0 $</div>
+						<div className={cn(st.cost)}>{totalPrice} $</div>
 						<div className={cn(st.cartLogo)}>
 							<img src={cartLogo} alt="cart" />
-							<div className={st.productsCount}>0</div>
+							<div className={st.productsCount}>{productsCount}</div>
 						</div>
 					</div>
 

@@ -13,7 +13,7 @@ export interface Product {
 
 export enum ProductsActionTypes {
 	SET_PRODUCTS = 'SET_PRODUCTS',
-	TOGGLE_LOADING = 'TOGGLE_LOADING'
+	TOGGLE_LOADING = 'TOGGLE_PRODUCT_LOADING'
 }
 
 export interface SetProductsAction {
