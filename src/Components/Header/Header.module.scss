@@ -65,6 +65,10 @@
 			padding: 7px 35px;
 			cursor: pointer;
 
+			&:active {
+				transform: translateY(2px);
+			}
+
 			.flexContainer {
 				display: flex;
 				justify-content: space-between;

@@ -1,6 +1,8 @@
 @use '../../styles/constants.scss'as *;
 
 .product {
+
+
 	&:hover {
 		.productImg {
 			transition: 300ms;
@@ -17,6 +19,7 @@
 
 	.productImg {
 		width: 280px;
+		height: 200px;
 		border-radius: 50%;
 		margin-bottom: 5px;
 		transition: 300ms;
@@ -73,6 +76,12 @@
 				background-color: $btnBgHover;
 
 
+			}
+
+			&:active {
+				// background-color: #3e8e41;
+				// box-shadow: 0 5px #666;
+				transform: translateY(2px);
 			}
 		}
 	}

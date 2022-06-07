@@ -5,22 +5,22 @@ import { Product as ProductProps } from '../../types/products';
 import { useActions } from './../../utils/hooks/useActions';
 
 
-const Product: FC<ProductProps> = ({ img, name, ingradients, price, id }) => {
+const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, id }) => {
 	const ingradientsList = ingradients?.map((ingradient, index) => <li key={index} >{ingradient}{index != ingradients?.length - 1 && ','}</li>);
 	const { addProductToCart } = useActions()
 	return (
 		<div className={st.product}>
 			<img className={st.productImg} src={img} alt="product" />
 			<h2 className={st.productName}>{name}</h2>
-			<ul className={st.ingradients}>
+			<ul className={cn({ [st.ingradients]: ingradientsList?.length })}>
 				{ingradientsList}
 			</ul>
 			<div className={st.flex}>
 				<div className={st.price}>{price} $</div>
-				<button onClick={() => addProductToCart({ img, name, ingradients, price, id })} className={st.addProduct}>+Add</button>
+				<button className={st.addProduct} onClick={() => addProductToCart({ img, name, ingradients, price, id })} >+Add</button>
 			</div>
 		</div>
 	);
-};
+});
 
 export default Product;

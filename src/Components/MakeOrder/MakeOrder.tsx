@@ -1,14 +1,13 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import cn from 'classnames';
 import st from './MakeOrder.module.scss'
 import Modal from '../Modal/Modal';
 
 interface MakeOrderProps {
-
 	clearCart(): void;
 }
 
-const MakeOrder: FC<MakeOrderProps> = ({ clearCart }) => {
+const MakeOrder: FC<MakeOrderProps> = React.memo(({ clearCart }) => {
 	const [isBtnActive, setIsBtnActive] = React.useState(false);
 	const [isModalActive, setIsModalActive] = useState(false);
 	const [inputs, setInputs] = React.useState([
@@ -18,13 +17,12 @@ const MakeOrder: FC<MakeOrderProps> = ({ clearCart }) => {
 
 	])
 
-	// const 
-
 	const onUserNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (!/^\d+$/.test(e.target.value[e.target.value.length - 1])) {
+		const inputVal = e.target.value;
+		if (!/^\d+$/.test(inputVal[inputVal.length - 1])) {
 			setInputs(inputs.map(input => {
 				if (input.type === 'name') {
-					input.value = e.target.value
+					input.value = inputVal
 					input.value.trim() !== '' ? input.isCorrect = true : input.isCorrect = false
 				}
 				return { ...input };
@@ -32,13 +30,13 @@ const MakeOrder: FC<MakeOrderProps> = ({ clearCart }) => {
 		}
 	}
 
-
 	const onUserPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (/^\d+$/.test(e.target.value[e.target.value.length - 1]) &&
-			e.target.value.length < 14 && e.target.value.length !== 3) {
+		const inputVal = e.target.value;
+		if (/^\d+$/.test(inputVal[inputVal.length - 1]) &&
+			inputVal.length < 14 && inputVal.includes('+38')) {
 			setInputs(inputs.map(input => {
 				if (input.type === 'phone') {
-					input.value = e.target.value
+					input.value = inputVal
 					input.value.trim().length === 13 ? input.isCorrect = true : input.isCorrect = false
 				}
 				return { ...input };
@@ -47,9 +45,10 @@ const MakeOrder: FC<MakeOrderProps> = ({ clearCart }) => {
 	}
 
 	const onUserLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const inputVal = e.target.value;
 		setInputs(inputs.map(input => {
 			if (input.type === 'location') {
-				input.value = e.target.value
+				input.value = inputVal
 				input.value.trim() !== '' ? input.isCorrect = true : input.isCorrect = false
 			}
 			return { ...input };
@@ -59,8 +58,6 @@ const MakeOrder: FC<MakeOrderProps> = ({ clearCart }) => {
 	const changeBtnActive = () => {
 		let result = true;
 		inputs.forEach(input => {
-			console.log(input.type, input.isCorrect);
-
 			if (!input.isCorrect) {
 				result = false;
 			}
@@ -116,6 +113,6 @@ const MakeOrder: FC<MakeOrderProps> = ({ clearCart }) => {
 				children={<div>Thanks for order !!!</div>} />
 		</>
 	);
-};
+});
 
 export default MakeOrder;
