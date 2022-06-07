@@ -23,7 +23,7 @@ const Header: FC = () => {
 						style={({ isActive }) => ({ fontWeight: isActive ? 500 : 400, })}
 						to='/drinks'>Drinks</NavLink>
 				</div>
-				<div className={cn(st.cart)}>
+				<NavLink to='/cart' className={cn(st.cart)}>
 					<div className={st.flexContainer}>
 						<div className={cn(st.cost)}>{totalPrice} $</div>
 						<div className={cn(st.cartLogo)}>
@@ -31,8 +31,7 @@ const Header: FC = () => {
 							<div className={st.productsCount}>{productsCount}</div>
 						</div>
 					</div>
-
-				</div>
+				</NavLink>
 			</div>
 
 		</header>

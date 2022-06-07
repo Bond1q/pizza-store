@@ -1,8 +1,6 @@
 import cn from 'classnames';
 import React, { FC, ReducerAction } from 'react';
-import image from '../../imgs/Diablo.jpg'
 import { Product as ProductTypes } from '../../types/products';
-import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import st from './PageContainer.module.scss'
 interface PageContainerProps {

@@ -7,7 +7,7 @@ import { useActions } from './../../utils/hooks/useActions';
 
 const Product: FC<ProductProps> = ({ img, name, ingradients, price, id }) => {
 	const ingradientsList = ingradients?.map((ingradient, index) => <li key={index} >{ingradient}{index != ingradients?.length - 1 && ','}</li>);
-	const { addProductToCard } = useActions()
+	const { addProductToCart } = useActions()
 	return (
 		<div className={st.product}>
 			<img className={st.productImg} src={img} alt="product" />
@@ -17,7 +17,7 @@ const Product: FC<ProductProps> = ({ img, name, ingradients, price, id }) => {
 			</ul>
 			<div className={st.flex}>
 				<div className={st.price}>{price} $</div>
-				<button onClick={() => addProductToCard({ img, name, ingradients, price, id })} className={st.addProduct}>+Add</button>
+				<button onClick={() => addProductToCart({ img, name, ingradients, price, id })} className={st.addProduct}>+Add</button>
 			</div>
 		</div>
 	);
