@@ -11,11 +11,6 @@
 		margin-bottom: 0;
 	}
 
-	// &:nth-child(even) {
-	// 	border-top: 1px solid black;
-
-	// }
-
 	.productView {
 		grid-column: 1/2;
 		display: flex;
@@ -89,6 +84,110 @@
 
 			color: #2a2a2a;
 
+		}
+	}
+}
+
+@media screen and (max-width:700px) {
+	.product {
+		// border: 1px solid grey;
+		padding: 15px;
+		display: grid;
+		grid-gap: 10px;
+		grid-template-columns: auto;
+		grid-template-areas:
+			"pV pV pr del"
+			"ct ct ct ct"
+
+		;
+		margin-bottom: 50px;
+		align-items: center;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.productView {
+			grid-area: pV;
+			display: flex;
+			align-items: center;
+			grid-column: 0;
+
+			img {
+				width: 60px;
+			}
+
+			.productName {
+				font-size: 20px;
+				color: $productName;
+				font-weight: 600;
+			}
+		}
+
+		.counter {
+			grid-area: ct;
+			grid-column: 0;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 200px;
+
+
+			.count {
+
+
+				font-weight: 600;
+				font-size: 20px;
+			}
+
+			button {
+				border: 3px solid $buttonBg;
+				color: $buttonBg;
+				border-radius: 50%;
+				font-size: 16px;
+				line-height: 16px;
+				padding: 2px 3px;
+				font-weight: 600;
+				background: #ffffff;
+
+				&:active {
+					transform: translateY(2px);
+				}
+
+				&:hover {
+					cursor: pointer;
+					border: 3px solid $btnBgHover;
+					color: $btnBgHover;
+
+				}
+			}
+
+
+		}
+
+		.price {
+			grid-area: pr;
+			grid-column: 0;
+			font-weight: 500;
+			font-size: 20px;
+		}
+
+		.delete {
+			text-align: right;
+			grid-area: del;
+			color: #9F9F9F;
+			grid-column: 0;
+
+			cursor: pointer;
+			transition: 200ms;
+
+			&:hover {
+				transition: 200ms;
+
+				color: #2a2a2a;
+
+			}
 		}
 	}
 }

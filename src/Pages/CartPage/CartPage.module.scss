@@ -19,6 +19,12 @@
 			text-align: center;
 			margin: 0;
 			margin-bottom: 70px;
+
+			@media screen and (max-width :700px) {
+				margin-bottom: 30px;
+				font-size: 38px;
+
+			}
 		}
 
 
@@ -34,6 +40,12 @@
 			span {
 				font-weight: 500;
 				color: #1f1f1f;
+
+			}
+
+			@media screen and (max-width :700px) {
+				margin: 30px 10px 50px 0;
+				font-size: 22px;
 
 			}
 		}
