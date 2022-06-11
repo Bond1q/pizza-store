@@ -9,6 +9,11 @@ import { useTypedSelector } from './../../utils/hooks/useTypedSelector';
 const Header: FC = () => {
 	const { totalPrice, productsCount } = useTypedSelector(state => state.cartReducer)
 	const [menuActive, setMenuActive] = React.useState(false);
+	const hideMenu = () => {
+		if (menuActive) {
+			setMenuActive(false)
+		}
+	}
 	return (
 		<header className={st.header}>
 			<div className={cn(st.adaptiveLines)}>
@@ -27,10 +32,9 @@ const Header: FC = () => {
 						<div className={st.productsCount}>{productsCount}</div>
 					</div>
 				</NavLink>
-
 			</div>
-			<div className={cn(st.container, st.grid, { [st.containerActive]: menuActive })}>
 
+			<div onClick={hideMenu} className={cn(st.container, st.grid, { [st.containerActive]: menuActive })}>
 				<div className={cn(st.storeName)}>
 					<img src={logo} alt="pizza" />
 					<div className={cn(st.name)}>PIZZA STORE</div>

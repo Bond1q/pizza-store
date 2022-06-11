@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { FC, ReducerAction } from 'react';
+import React, { FC } from 'react';
 import { Product as ProductTypes } from '../../types/products';
 import Product from '../Product/Product';
 import st from './PageContainer.module.scss'

@@ -90,14 +90,23 @@
 
 @media screen and (max-width:700px) {
 	.product {
-		// border: 1px solid grey;
+		&::after {
+			content: '';
+			position: absolute;
+			width: calc(100% - 20px);
+			height: 1px;
+			background: #c9c8c8;
+			bottom: -25px;
+			left: 10px;
+		}
+
+		position: relative;
 		padding: 15px;
 		display: grid;
 		grid-gap: 10px;
 		grid-template-columns: auto;
-		grid-template-areas:
-			"pV pV pr del"
-			"ct ct ct ct"
+		grid-template-areas: "pV pV pr del"
+		"ct ct ct ct"
 
 		;
 		margin-bottom: 50px;
@@ -131,7 +140,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			width: 200px;
+			width: 125px;
 
 
 			.count {
@@ -171,6 +180,7 @@
 			grid-column: 0;
 			font-weight: 500;
 			font-size: 20px;
+			text-align: right;
 		}
 
 		.delete {

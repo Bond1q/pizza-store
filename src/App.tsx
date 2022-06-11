@@ -17,7 +17,7 @@ function App() {
 					<Route path='' element={<CartPage />} />
 				</Route>
 
-				<Route path='/' element={<Navigate to={'/pizzas'} />} />
+				<Route path='*' element={<Navigate to={'/pizzas'} />} />
 			</Routes>
 		</div>
 	);

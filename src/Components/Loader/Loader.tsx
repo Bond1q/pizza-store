@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import loader from '../../imgs/loader.gif'
 import st from './Loader.module.scss'
 const Loader: FC = () => {
 	return (

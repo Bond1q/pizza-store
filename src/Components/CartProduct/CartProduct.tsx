@@ -9,7 +9,6 @@ interface CartProductProps extends ProductForCart {
 
 const CartProduct: FC<CartProductProps> = React.memo(({ name, id, price, count, img, decreaseProductCount,
 	increaseProductCount, deleteProductFromCart }) => {
-	// console.log('rerender', name);
 
 	return (
 		<div className={st.product} >
