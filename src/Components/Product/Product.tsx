@@ -3,6 +3,8 @@ import st from './Product.module.scss'
 import cn from 'classnames'
 import { Product as ProductProps } from '../../types/products';
 import { useActions } from './../../utils/hooks/useActions';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, id }) => {
@@ -10,7 +12,12 @@ const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, i
 	const { addProductToCart } = useActions()
 	return (
 		<div className={st.product}>
-			<img className={st.productImg} src={img} alt="product" />
+			<LazyLoadImage
+				alt={'pizza'}
+				height={200}
+				src={img}
+				width={280}
+				effect="blur" />
 			<h2 className={st.productName}>{name}</h2>
 			<ul className={cn({ [st.ingradients]: ingradientsList?.length })}>
 				{ingradientsList}
