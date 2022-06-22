@@ -33,12 +33,14 @@ export const cartReducer = (state = initalState, action: CartAction): CartState 
 			setProductsToLocalStorage(newPrice, newProductsCount, newProducts)
 			return { ...state, totalPrice: newPrice, products: newProducts, productsCount: newProductsCount }
 
+
 		case CartActionTypes.DELETE_PRODUCT_FROM_CART:
 			newProducts = [...state.products].filter(product => product.id !== action.id);
 			newProductsCount--;
-			newPrice = newProducts.reduce((prevValue, currentVal) => (currentVal.price * currentVal.count), 0);
+			newPrice = newProducts.reduce((prevValue, currentVal) => (prevValue + currentVal.price * currentVal.count), 0);
 			setProductsToLocalStorage(newPrice, newProductsCount, newProducts)
 			return { ...state, products: newProducts, productsCount: newProductsCount, totalPrice: newPrice }
+
 
 		case CartActionTypes.DECREASE_PRODUCT_COUNT:
 			newProducts = [...state.products].filter(product => !(product.id === action.id && product.count === 1)).map(product => {
@@ -51,6 +53,7 @@ export const cartReducer = (state = initalState, action: CartAction): CartState 
 			newPrice = newProducts.reduce((prevValue, currentVal) => prevValue + (currentVal.price * currentVal.count), 0);
 			setProductsToLocalStorage(newPrice, newProductsCount, newProducts)
 			return { ...state, products: newProducts, productsCount: newProductsCount, totalPrice: newPrice }
+
 
 		case CartActionTypes.INCREASE_PRODUCT_COUNT:
 			newProducts = [...state.products].map(product => {

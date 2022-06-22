@@ -22,7 +22,7 @@
 
 	.grid {
 		display: grid;
-		grid-template-columns: 200px 3fr 200px 1fr 200px;
+		grid-template-columns: 200px 3fr 200px 1fr 250px;
 		align-items: center;
 
 
@@ -64,26 +64,35 @@
 			grid-column: 5;
 			border-radius: 62px;
 			padding: 7px 35px;
-			cursor: pointer;
 			min-width: 200px;
+			max-width: 250px;
+			cursor: pointer;
+			justify-self: right;
 
 			&:active {
 				transform: translateY(2px);
 			}
 
 			.flexContainer {
+
 				display: flex;
 				justify-content: space-between;
 				position: relative;
 				align-items: center;
 
+
 				.cost {
 					font-weight: 400;
 					font-size: 24px;
 					line-height: 24px;
+					text-align: right;
 				}
 
 				.cartLogo {
+					transition: all 300ms;
+					width: 34px;
+					height: 30px;
+
 					position: relative;
 
 					img {
@@ -105,22 +114,19 @@
 					}
 				}
 
-				&::after {
-					position: absolute;
-					content: "";
+				span {
+					transition: 300ms;
+					transition: all 300ms;
+					display: block;
 					height: 33px;
 					width: 1px;
 					background-color: #ffffff;
-					right: 60px;
-					top: 0;
+					margin: 0 10px;
 				}
-
 			}
 
 			&:hover {
 				background-color: $btnBgHover;
-
-
 			}
 		}
 	}

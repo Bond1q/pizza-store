@@ -50,6 +50,8 @@ const Header: FC = () => {
 				<NavLink to='/cart' className={cn(st.cart)}>
 					<div className={st.flexContainer}>
 						<div className={cn(st.cost)}>{totalPrice} $</div>
+						<span></span>
+
 						<div className={cn(st.cartLogo)}>
 							<img src={cartLogo} alt="cart" />
 							<div className={st.productsCount}>{productsCount}</div>
