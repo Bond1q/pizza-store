@@ -1,77 +1,108 @@
-import React, { FC, useCallback, useState } from 'react';
-import cn from 'classnames';
+import React, { FC, useState } from 'react'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import cn from 'classnames'
+
 import st from './MakeOrder.module.scss'
-import Modal from '../Modal/Modal';
-import { useInput } from './../../utils/hooks/useInput';
+import Modal from '../Modal/Modal'
 
 interface MakeOrderProps {
-	clearCart(): void;
+   clearCart(): void
 }
 
 const MakeOrder: FC<MakeOrderProps> = React.memo(({ clearCart }) => {
-	const [isBtnActive, setIsBtnActive] = React.useState(false);
-	const [isModalActive, setIsModalActive] = useState(false);
-	const userName = useInput('', /^[a-zA-Z\s]*$/)
-	const userPhone = useInput('', /^\+?[1-9][0-9]{11,12}$/)
-	const userLocation = useInput('', /./)
+   const [isModalActive, setIsModalActive] = useState(false)
 
-	React.useEffect(() => {
-		setIsBtnActive(userName.canBeOrder && userPhone.canBeOrder && userLocation.canBeOrder)
-	}, [userName.canBeOrder, userPhone.canBeOrder, userLocation.canBeOrder])
+   React.useEffect(() => {
+      if (isModalActive) {
+         const timer = setTimeout(() => {
+            clearCart()
+         }, 1500)
+         return () => clearTimeout(timer)
+      }
+   }, [isModalActive, clearCart])
 
-	const onOrderClick = () => {
-		setIsModalActive(true)
-	}
+   const onOrderClick = () => {
+      setIsModalActive(true)
+   }
+   const phoneRegExp = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/
 
-	React.useEffect(() => {
-		if (isModalActive) {
-			const timer = setTimeout(() => {
-				clearCart();
-			}, 1500)
-			return () => clearTimeout(timer)
-		}
+   const formik = useFormik({
+      initialValues: {
+         name: '',
+         phone: '',
+         street: '',
+      },
+      validationSchema: Yup.object({
+         name: Yup.string().required('Name is required'),
+         phone: Yup.string()
+            .matches(phoneRegExp, 'Phone number is not valid')
+            .required('Phone is required'),
+         street: Yup.string().required('Street is required'),
+      }),
+      onSubmit: (values) => {
+         onOrderClick()
+      },
+   })
 
-	}, [isModalActive])
+   const isInputUncorrect = (inputName: 'name' | 'phone' | 'street') => {
+      return formik.touched[inputName] && formik.errors[inputName]
+   }
+   return (
+      <>
+         <h2 className={st.chapter}>Making an order</h2>
+         <form onSubmit={formik.handleSubmit}>
+            <div className={cn({ [st.error]: isInputUncorrect('name') })}>
+               <input
+                  id='name'
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.name}
+                  className={cn({ [st.error]: isInputUncorrect('name') })}
+                  type='text'
+                  placeholder='Name'
+               />
+               {isInputUncorrect('name') ? <p>{formik.errors.name}</p> : null}
+            </div>
+            <div className={cn({ [st.error]: isInputUncorrect('phone') })}>
+               <input
+                  id='phone'
+                  onBlur={formik.handleBlur}
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  type='tel'
+                  placeholder='Phone'
+               />
+               {isInputUncorrect('phone') ? <p>{formik.errors.phone}</p> : null}
+            </div>
+            <div className={cn({ [st.error]: isInputUncorrect('street') })}>
+               <input
+                  id='street'
+                  onBlur={formik.handleBlur}
+                  value={formik.values.street}
+                  onChange={formik.handleChange}
+                  className={cn({ [st.error]: isInputUncorrect('street') })}
+                  type='text'
+                  placeholder='Street'
+               />
+               {isInputUncorrect('street') ? <p>{formik.errors.street}</p> : null}
+            </div>
+            <div
+               className={cn(st.orderBtn, {
+                  [st.isButtonDisabled]: !(formik.isValid && formik.dirty),
+               })}
+            >
+               <button onSubmit={onOrderClick} disabled={!(formik.isValid && formik.dirty)}>
+                  Order
+               </button>
+            </div>
+         </form>
 
-	return (
-		<>
-			<h2 className={st.chapter}>Making an order</h2>
-			<form>
-				<input
-					value={userName.value}
-					onChange={userName.onChange}
-					onFocus={userName.onFocus}
-					className={cn({ [st.error]: !userName.isCorrect })}
-					type="text" placeholder='Name'
-				/>
+         <Modal isModalActive={isModalActive} setIsModalActive={setIsModalActive}>
+            <div>Thanks for order !!!</div>
+         </Modal>
+      </>
+   )
+})
 
-				<input
-					value={userPhone.value}
-					onChange={userPhone.onChange}
-					onFocus={userPhone.onFocus}
-					className={cn({ [st.error]: !userPhone.isCorrect })}
-					type="tel" placeholder='Phone (+389999999999) '
-
-				/>
-
-				<input value={userLocation.value}
-					onChange={userLocation.onChange}
-					onFocus={userLocation.onFocus}
-					className={cn({ [st.error]: !userLocation.isCorrect })}
-					type="text" placeholder='Street'
-
-				/>
-			</form>
-
-			<div className={cn(st.orderBtn, { [st.isDisabled]: !isBtnActive })}>
-				<button onClick={onOrderClick} disabled={!isBtnActive}  >Order</button>
-			</div>
-			<Modal
-				isModalActive={isModalActive}
-				setIsModalActive={setIsModalActive}
-				children={<div>Thanks for order !!!</div>} />
-		</>
-	);
-});
-
-export default MakeOrder;
+export default MakeOrder

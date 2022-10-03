@@ -1,4 +1,4 @@
-@use '../../styles/constants.scss'as *;
+@use '../../assets/styles/constants.scss'as *;
 
 .chapter {
 	color: $pageTitleText;
@@ -34,44 +34,56 @@ form {
 	}
 
 	.error {
-		border: 2px solid #df4343;
+		input {
+			border: 2px solid #df4343;
+		}
+
+		p {
+			color: #df4343;
+			margin: 0;
+			margin-top: 2px;
+			margin-left: 3px;
+		}
 
 	}
-}
 
-.orderBtn {
+	.orderBtn {
 
-	margin-top: 70px;
-	text-align: center;
-	margin-bottom: 20px;
+		text-align: center;
+		margin-bottom: 20px;
+		grid-column: 2/3;
 
-	button {
-		border: none;
-		width: 300px;
-		background: $buttonBg;
-		color: #ffffff;
-		padding: 12px 0;
-		border-radius: 62px;
-		font-weight: 600;
-		font-size: 22px;
+		button {
+			border: none;
+			width: 300px;
+			background: $buttonBg;
+			color: #ffffff;
+			padding: 12px 0;
+			border-radius: 62px;
+			font-weight: 600;
+			font-size: 22px;
 
-		&:hover {
-			cursor: pointer;
-			background: $btnBgHover;
+			&:hover {
+				cursor: pointer;
+				background: $btnBgHover;
+			}
 		}
 	}
-}
 
-.isDisabled {
-	button {
-		background: #f66e6e;
-
-		&:hover {
-			cursor: default;
+	.isButtonDisabled {
+		button {
 			background: #f66e6e;
+
+			&:hover {
+				cursor: default;
+				background: #f66e6e;
+			}
 		}
 	}
 }
+
+
+
 
 @media screen and (max-width:700px) {
 	.chapter {
@@ -106,11 +118,6 @@ form {
 
 
 			}
-		}
-
-		.error {
-			border: 2px solid #df4343;
-
 		}
 	}
 

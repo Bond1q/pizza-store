@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "firebase": "^9.8.1",
+    "formik": "^2.2.9",
     "gh-pages": "^4.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -25,7 +26,8 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.52.1",
     "typescript": "^4.7.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,7 +35,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+	 "format": "prettier --write \"**/*.{ts,tsx,css}\"",
+    "lint": "eslint **/*.{tsx,ts}",
+    "lint:fix": "eslint --fix **/*.{tsx,ts}"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +59,16 @@
     ]
   },
   "devDependencies": {
-    "@types/react-lazy-load-image-component": "^1.5.2"
+    "@types/react-lazy-load-image-component": "^1.5.2",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1"
   }
 }
