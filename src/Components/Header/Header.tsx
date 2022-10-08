@@ -2,20 +2,23 @@ import React, { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import cn from 'classnames'
 
-import { useTypedSelector } from './../../utils/hooks/useTypedSelector'
-
 import logo from '../../assets/imgs/logo.png'
 import cartLogo from '../../assets/imgs/carLogo.png'
 import st from '../Header/Header.module.scss'
-
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../utils/hooks/useAppSelector'
 const Header: FC = () => {
-   const { totalPrice, productsCount } = useTypedSelector((state) => state.cartReducer)
+   const { totalPrice, productsCount } = useAppSelector((state) => state.cart)
+   const { getCartProducts } = useAppDispatch()
    const [menuActive, setMenuActive] = React.useState(false)
    const hideMenu = () => {
       if (menuActive) {
          setMenuActive(false)
       }
    }
+   React.useEffect(() => {
+      getCartProducts()
+   }, [])
    return (
       <header className={st.header}>
          <div className={cn(st.adaptiveLines)}>

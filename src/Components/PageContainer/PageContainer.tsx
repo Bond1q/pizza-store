@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import cn from 'classnames'
 
-import { Product as ProductTypes } from '../../types/products'
+import { Product as ProductTypes } from '../../utils/types/products'
 import Product from '../Product/Product'
 
 import st from './PageContainer.module.scss'

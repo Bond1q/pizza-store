@@ -3,10 +3,10 @@ import cn from 'classnames'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
-import { Product as ProductProps } from '../../types/products'
-import { useActions } from './../../utils/hooks/useActions'
+import { Product as ProductProps } from '../../utils/types/products'
 
 import st from './Product.module.scss'
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
 
 const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, id }) => {
    const ingradientsList = ingradients?.map((ingradient, index) => (
@@ -15,7 +15,14 @@ const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, i
          {index !== ingradients?.length - 1 && ','}
       </li>
    ))
-   const { addProductToCart } = useActions()
+   const { addProductToCart } = useAppDispatch()
+   const product: ProductProps = {
+      img,
+      name,
+      ingradients,
+      price,
+      id,
+   }
    return (
       <div className={st.product}>
          <LazyLoadImage alt={'pizza'} height={200} src={img} width={280} effect='blur' />
@@ -25,7 +32,7 @@ const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, i
             <div className={st.price}>{price} $</div>
             <button
                className={st.addProduct}
-               onClick={() => addProductToCart({ img, name, ingradients, price, id })}
+               onClick={() => addProductToCart({ product, count: 1 })}
             >
                +Add
             </button>

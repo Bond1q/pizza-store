@@ -7,19 +7,18 @@ import DrinksPage from './Pages/DrinksPage/DrinksPage'
 import CartPage from './Pages/CartPage/CartPage'
 
 const App = () => {
-	return (
-		<div className='App'>
-			<Header />
-			<Routes>
-				<Route path='/pizzas' element={<PizzasPage />} />
-				<Route path='/drinks' element={<DrinksPage />} />
-				< Route path='/cart' element={<CartPage />} />
+   return (
+      <div className='App'>
+         <Header />
+         <Routes>
+            <Route path='/pizzas' element={<PizzasPage />} />
+            <Route path='/drinks' element={<DrinksPage />} />
+            <Route path='/cart' element={<CartPage />} />
 
-
-				<Route path='*' element={<Navigate to={'/pizzas'} />} />
-			</Routes>
-		</div>
-	)
+            <Route path='*' element={<Navigate to={'/pizzas'} />} />
+         </Routes>
+      </div>
+   )
 }
 
 export default App

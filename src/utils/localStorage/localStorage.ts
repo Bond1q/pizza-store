@@ -1,12 +1,24 @@
+import { UnorderedProducts } from '../types/cart'
 class LocalStorage {
-   private key = 'cart'
-   setProducts(products: string) {
-      localStorage.setItem(this.key, products)
+   private key = ''
+   constructor(key: string) {
+      this.key = key || 'default'
    }
-   getProducts(): string {
-      if (localStorage.getItem(this.key)) return localStorage.getItem(this.key)!
-      return ''
+
+   setData(data: string) {
+      localStorage.setItem(this.key, data)
+   }
+   getData(): string {
+      return localStorage.getItem(this.key) || ''
+   }
+
+   setUnorderedProducts(totalPrice: number, productsCount: number, products: UnorderedProducts[]) {
+      this.setData(JSON.stringify({ totalPrice, productsCount, products }))
+   }
+
+   clearStorage() {
+      this.setData('')
    }
 }
 
-export default new LocalStorage()
+export default LocalStorage

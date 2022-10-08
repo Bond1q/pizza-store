@@ -1,17 +1,24 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 
-import { useTypedSelector } from './../../utils/hooks/useTypedSelector'
-import { useActions } from './../../utils/hooks/useActions'
 import CartProduct from '../../Components/CartProduct/CartProduct'
 import MakeOrder from '../../Components/MakeOrder/MakeOrder'
-
+import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
+import { useAppSelector } from '../../utils/hooks/useAppSelector'
 import st from './CartPage.module.scss'
 
 const CartPage: FC = () => {
-   const { totalPrice, products } = useTypedSelector((state) => state.cartReducer)
-   const { deleteProductFromCart, increaseProductCount, decreaseProductCount, clearCart } =
-      useActions()
+   const { totalPrice, products } = useAppSelector((state) => state.cart)
+   const {
+      deleteProductFromCart,
+      increaseProductCount,
+      decreaseProductCount,
+      clearCart,
+      getCartProducts,
+   } = useAppDispatch()
 
+   useEffect(() => {
+      if (products.length == 0) getCartProducts()
+   }, [])
    return (
       <div className={st.cartPage}>
          <div className={st.container}>

@@ -1,11 +1,15 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux'
-import thunk from 'redux-thunk'
-import { productsReducer } from './reducers/productsReducer'
-import { cartReducer } from './reducers/cartReducer'
-
+import { combineReducers } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import products from './reducers/productsSlice'
+import cart from './reducers/cartSlice'
 const reducers = combineReducers({
-   productsReducer,
-   cartReducer,
+   products,
+   cart,
 })
-export const store = createStore(reducers, applyMiddleware(thunk))
-export type ReduxState = ReturnType<typeof reducers>
+
+export const store = configureStore({
+   reducer: reducers,
+})
+
+export type StoreState = ReturnType<typeof reducers>
+export type StoreDispatch = typeof store.dispatch

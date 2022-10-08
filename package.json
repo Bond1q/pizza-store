@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://bond1q.github.io/pizza-store/",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
@@ -36,7 +37,7 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
     "predeploy": "npm run build",
-	 "format": "prettier --write \"**/*.{ts,tsx,css}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,css}\"",
     "lint": "eslint **/*.{tsx,ts}",
     "lint:fix": "eslint --fix **/*.{tsx,ts}"
   },

@@ -41,6 +41,7 @@ const MakeOrder: FC<MakeOrderProps> = React.memo(({ clearCart }) => {
          street: Yup.string().required('Street is required'),
       }),
       onSubmit: (values) => {
+         console.log(values)
          onOrderClick()
       },
    })
