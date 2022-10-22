@@ -5,6 +5,7 @@ import cn from 'classnames'
 
 import st from './MakeOrder.module.scss'
 import Modal from '../Modal/Modal'
+import { useUserLocation } from './hooks/useUserLocation'
 
 interface MakeOrderProps {
    clearCart(): void
@@ -12,6 +13,10 @@ interface MakeOrderProps {
 
 const MakeOrder: FC<MakeOrderProps> = React.memo(({ clearCart }) => {
    const [isModalActive, setIsModalActive] = useState(false)
+   const {
+      location: { city, countryName },
+      getLocation,
+   } = useUserLocation()
 
    React.useEffect(() => {
       if (isModalActive) {
@@ -22,6 +27,13 @@ const MakeOrder: FC<MakeOrderProps> = React.memo(({ clearCart }) => {
       }
    }, [isModalActive, clearCart])
 
+   React.useEffect(() => {
+      if (city && countryName) {
+         const text = city + ', ' + countryName
+         formik.setFieldValue('location', text)
+      }
+   }, [city, countryName])
+
    const onOrderClick = () => {
       setIsModalActive(true)
    }
@@ -31,22 +43,21 @@ const MakeOrder: FC<MakeOrderProps> = React.memo(({ clearCart }) => {
       initialValues: {
          name: '',
          phone: '',
-         street: '',
+         location: '',
       },
       validationSchema: Yup.object({
          name: Yup.string().required('Name is required'),
          phone: Yup.string()
             .matches(phoneRegExp, 'Phone number is not valid')
             .required('Phone is required'),
-         street: Yup.string().required('Street is required'),
+         location: Yup.string().required('location is required'),
       }),
       onSubmit: (values) => {
          console.log(values)
          onOrderClick()
       },
    })
-
-   const isInputUncorrect = (inputName: 'name' | 'phone' | 'street') => {
+   const isInputUncorrect = (inputName: 'name' | 'phone' | 'location') => {
       return formik.touched[inputName] && formik.errors[inputName]
    }
    return (
@@ -76,17 +87,18 @@ const MakeOrder: FC<MakeOrderProps> = React.memo(({ clearCart }) => {
                />
                {isInputUncorrect('phone') ? <p>{formik.errors.phone}</p> : null}
             </div>
-            <div className={cn({ [st.error]: isInputUncorrect('street') })}>
+
+            <div onClick={getLocation} className={cn({ [st.error]: isInputUncorrect('location') })}>
                <input
-                  id='street'
+                  id='location'
                   onBlur={formik.handleBlur}
-                  value={formik.values.street}
+                  value={formik.values.location}
                   onChange={formik.handleChange}
-                  className={cn({ [st.error]: isInputUncorrect('street') })}
+                  className={cn({ [st.error]: isInputUncorrect('location') })}
                   type='text'
-                  placeholder='Street'
+                  placeholder='Location'
                />
-               {isInputUncorrect('street') ? <p>{formik.errors.street}</p> : null}
+               {isInputUncorrect('location') ? <p>{formik.errors.location}</p> : null}
             </div>
             <div
                className={cn(st.orderBtn, {
