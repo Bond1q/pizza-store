@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 
-import CartProduct from '../../Components/CartProduct/CartProduct'
+import ProductForCart from '../../Components/Product/ProductForCart/ProductForCart'
 import MakeOrder from '../../Components/MakeOrder/MakeOrder'
 import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../utils/hooks/useAppSelector'
@@ -30,7 +30,7 @@ const CartPage: FC = () => {
                   <div className={st.products}>
                      {products.map(({ name, id, price, count, img }) => {
                         return (
-                           <CartProduct
+                           <ProductForCart
                               price={price}
                               name={name}
                               count={count}

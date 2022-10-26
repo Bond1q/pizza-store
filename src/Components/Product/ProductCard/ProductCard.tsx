@@ -3,12 +3,12 @@ import cn from 'classnames'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
-import { Product as ProductProps } from '../../utils/types/products'
+import { Product as ProductProps } from '../../../utils/types/products'
 
-import st from './Product.module.scss'
-import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
+import st from './ProductCard.module.scss'
+import { useAppDispatch } from '../../../utils/hooks/useAppDispatch'
 
-const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, id }) => {
+const ProductCard: FC<ProductProps> = React.memo(({ img, name, ingradients, price, id }) => {
    const ingradientsList = ingradients?.map((ingradient, index) => (
       <li key={index}>
          {ingradient}
@@ -41,4 +41,4 @@ const Product: FC<ProductProps> = React.memo(({ img, name, ingradients, price, i
    )
 })
 
-export default Product
+export default ProductCard

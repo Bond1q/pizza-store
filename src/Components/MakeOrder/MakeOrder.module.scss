@@ -98,7 +98,8 @@ form {
 	form {
 		padding: 0 20px;
 		display: grid;
-		grid-template-columns: repeat(1, 1fr);
+		grid-template-columns: 1fr;
+		justify-items: center;
 		grid-gap: 30px;
 
 		input {
@@ -119,38 +120,40 @@ form {
 
 			}
 		}
-	}
 
-	.orderBtn {
+		.orderBtn {
 
-		margin-bottom: 20px;
+			margin-bottom: 20px;
+			grid-column: 1/2;
 
+			button {
+				border: none;
+				width: 300px;
+				background: $buttonBg;
+				color: #ffffff;
+				padding: 12px 0;
+				border-radius: 62px;
+				font-weight: 600;
+				font-size: 22px;
 
-		button {
-			border: none;
-			width: 300px;
-			background: $buttonBg;
-			color: #ffffff;
-			padding: 12px 0;
-			border-radius: 62px;
-			font-weight: 600;
-			font-size: 22px;
-
-			&:hover {
-				cursor: pointer;
-				background: $btnBgHover;
+				&:hover {
+					cursor: pointer;
+					background: $btnBgHover;
+				}
 			}
 		}
-	}
 
-	.isDisabled {
-		button {
-			background: #f66e6e;
-
-			&:hover {
-				cursor: default;
+		.isButtonDisabled {
+			button {
 				background: #f66e6e;
+
+				&:hover {
+					cursor: default;
+					background: #f66e6e;
+				}
 			}
 		}
 	}
+
+
 }

@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
 
-import { UnorderedProducts } from '../../utils/types/cart'
-import { ChangeProductCountInCart, DeletionProductFromCart } from '../../utils/types/cart'
-import st from './CartProduct.module.scss'
-interface CartProductProps extends UnorderedProducts {
+import { UnorderedProducts } from '../../../utils/types/cart'
+import { ChangeProductCountInCart, DeletionProductFromCart } from '../../../utils/types/cart'
+import st from './ProductForCart.module.scss'
+interface ProductForCartProps extends UnorderedProducts {
    decreaseProductCount(id: ChangeProductCountInCart): void
    increaseProductCount(id: ChangeProductCountInCart): void
    deleteProductFromCart(id: DeletionProductFromCart): void
 }
 
-const CartProduct: FC<CartProductProps> = React.memo(
+const ProductForCart: FC<ProductForCartProps> = React.memo(
    ({
       name,
       id,
@@ -43,5 +43,5 @@ const CartProduct: FC<CartProductProps> = React.memo(
       )
    },
 )
-CartProduct.displayName = 'CartProduct'
-export default CartProduct
+ProductForCart.displayName = 'ProductForCart'
+export default ProductForCart
