@@ -3,13 +3,13 @@ import cn from 'classnames'
 
 import st from './Modal.module.scss'
 
-interface Modal {
+export interface ModalProps {
    children?: React.ReactNode
    isModalActive: boolean
    setIsModalActive(isActive: boolean): void
 }
 
-const Modal: FC<Modal> = ({ children, isModalActive, setIsModalActive }) => {
+const Modal: FC<ModalProps> = ({ children, isModalActive, setIsModalActive }) => {
    return (
       <div className={cn(st.modal, { [st.modalActive]: isModalActive })}>
          <div className={cn(st.content, { [st.contentActive]: isModalActive })}>

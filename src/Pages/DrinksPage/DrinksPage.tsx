@@ -13,7 +13,15 @@ const DrinksPage: FC = () => {
       getProducts(ProductsTypes.DRINKS)
    }, [getProducts])
 
-   return <>{isLoading ? <Loader /> : <PageContainer title='Drinks' products={products} />}</>
+   return (
+      <>
+         {isLoading ? (
+            <Loader />
+         ) : (
+            <PageContainer shouldShowModal={false} title='Drinks' products={products} />
+         )}
+      </>
+   )
 }
 
 export default DrinksPage
