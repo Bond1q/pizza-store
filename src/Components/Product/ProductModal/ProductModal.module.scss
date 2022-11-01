@@ -1,4 +1,7 @@
+@use '../../../assets/styles/constants.scss'as *;
+
 .productModal {
+	border-radius: 5px;
 	padding: 40px;
 	padding-top: 70px;
 	width: 850px;
@@ -42,10 +45,15 @@
 				display: grid;
 				grid-template-columns: 1fr;
 				gap: 5px;
+				margin-top: 15px;
 
 				label {
 					position: relative;
 					cursor: pointer;
+				}
+
+				.divider {
+					margin: 0 10px;
 				}
 
 				input[type="radio"] {
@@ -100,6 +108,32 @@
 					}
 				}
 			}
+		}
+	}
+
+	.addProduct {
+		background: $buttonBg;
+		padding: 7px 24px;
+		border: none;
+		font-weight: 500;
+		font-size: 18px;
+		border-radius: 70px;
+		color: #FFFFFF;
+		text-align: center;
+		cursor: pointer;
+		display: block;
+		margin-left: auto;
+
+		&:hover {
+			background-color: $btnBgHover;
+
+
+		}
+
+		&:active {
+			// background-color: #3e8e41;
+			// box-shadow: 0 5px #666;
+			transform: translateY(2px);
 		}
 	}
 
