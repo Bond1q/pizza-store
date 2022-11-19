@@ -135,56 +135,60 @@
 @media screen and (max-width: 1000px) {
 
 	.header {
-		padding: 11px 0;
+		padding: 20px 15px;
 		position: relative;
 
-		.adaptiveLines {
-			padding-left: 10px;
-			padding-bottom: 3px;
-			display: block;
-			padding: 0 10px 3px 10px;
 
-			.lines {
-				span {
-					transition: 400ms;
-
-					display: block;
-					width: 15px;
-					height: 2px;
-					background: rgb(255, 255, 255);
-
-					&:nth-child(2) {
-						transform: translateY(5px);
-					}
-				}
-			}
-
-			.linesAnimation {
+		.lines {
+			span {
 				transition: 400ms;
 
-				span {
-					transition: 400ms;
+				display: block;
+				width: 15px;
+				height: 2px;
+				background: rgb(255, 255, 255);
 
-					&:nth-child(1) {
-						transform: rotate(-45deg) translate(0px, 1px);
-						;
-					}
+				&:nth-child(1) {
+					transform: translateY(-2px);
+				}
 
-					&:nth-child(2) {
-						transform: rotate(45deg) translate(0px, -2px);
-					}
+				&:nth-child(2) {
+					transform: translateY(2px);
 				}
 			}
+		}
+
+		.linesAnimation {
+			transition: 400ms;
+
+			span {
+				transition: 400ms;
+
+				&:nth-child(1) {
+					transform: translate(0px, 0px) rotate(-90deg) rotate(45deg);
+				}
+
+				&:nth-child(2) {
+					transform: translate(0px, -2px) rotate(-90deg) rotate(-45deg);
+				}
+			}
+		}
+
+
+
+		.grid {
+			grid-template-columns: 0.95fr 1.5fr 1fr;
+			align-items: center;
 
 			.storeName {
+				grid-column: 2;
 				display: flex;
-				justify-content: space-between;
+				justify-content: space-evenly;
 				align-items: center;
-				width: 150px;
-				margin: 0 auto;
 
 				img {
-					width: 25px;
+					width: 30px;
+					height: 30px;
 				}
 
 				font-weight: 600;
@@ -193,101 +197,103 @@
 
 			}
 
-			.adaptiveCart {
-				cursor: pointer;
-				position: absolute;
-				right: 10px;
-				top: 15px;
-
-				&:active {
-					transform: translateY(2px);
-				}
-
-				.cartLogo {
-					position: relative;
-
-					img {
-						width: 25px;
-						height: 21px;
-					}
-
-					.productsCount {
-						font-size: 9px;
-						top: -5px;
-						right: -5px;
-						position: absolute;
-						border-radius: 50%;
-						background: #282828;
-						width: 15px;
-						height: 15px;
-						text-align: center;
-						line-height: 15px;
-					}
-				}
-			}
-
-		}
-
-
-
-		.container {
-			border-top: 1px solid rgb(105, 105, 105);
-			max-width: $containerWidth;
-			margin: 0 auto;
-			opacity: 0;
-			transform: translateY(-10px);
-			pointer-events: none;
-			transition: 400ms;
-			background: transparent;
-			position: absolute;
-			padding: 15px 0;
-			z-index: 100;
-			width: 100vw;
-		}
-
-		.containerActive {
-			top: 42px;
-			width: 100vw;
-			background: $headerBg;
-			display: flex;
-			flex-direction: column;
-			position: absolute;
-			transition: 400ms;
-			opacity: 1;
-			transform: translateY(10px);
-			pointer-events: all;
-
-		}
-
-		.grid {
-			grid-template-columns: 0;
-
-
-			.storeName {
-				display: none;
-			}
-
 			.menu {
-				display: flex;
+				opacity: 0;
+				pointer-events: none;
 				flex-direction: column;
 				justify-content: space-between;
 				font-size: 16px;
+				display: flex;
+				position: absolute;
+				z-index: 100;
+				top: 60px;
+				left: 0;
+				width: 100vw;
+				background: $headerBg;
+				transition: 300ms;
+				transform: translateY(-10px);
+				// 	pointer-events: all;
 
 				a {
+					text-align: center;
+					padding: 7px 0;
+					border-bottom: 1px solid grey;
 
 					&:hover {
 						color: #e6e3e3;
 					}
 
 					&:nth-child(1) {
-						margin-bottom: 13px;
+						border-top: 1px solid grey;
+						border-bottom: 1px solid grey;
+
 					}
 				}
 			}
 
-			.cart {
-				display: none;
 
+
+			.cart {
+				background-color: transparent;
+				grid-column: 3;
+				padding: 0;
+				max-width: 100%;
+				min-width: 100%;
+
+				&:active {
+					transform: translateY(2px);
+				}
+
+				.flexContainer {
+					justify-content: right;
+					margin-right: 5px;
+
+					.cost {
+						display: none;
+					}
+
+					.cartLogo {
+						width: 24px;
+						height: 20px;
+
+						img {
+							width: 24px;
+							height: 20px;
+						}
+
+						.productsCount {
+							font-size: 9px;
+							top: -4px;
+							right: -6px;
+							background: #ffffff;
+							color: #000000;
+							border: 1px solid black;
+							width: 15px;
+							height: 15px;
+							font-weight: 500;
+							line-height: 13px;
+						}
+					}
+
+					span {
+						display: none;
+					}
+				}
+
+				&:hover {
+					background-color: transparent;
+				}
+			}
+		}
+
+
+
+		.containerActive {
+			.menu {
+				opacity: 1;
+				pointer-events: all;
+				transition: 300ms;
+				transform: translateY(10px);
 			}
 		}
 	}

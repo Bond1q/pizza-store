@@ -8,42 +8,41 @@ import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../utils/hooks/useAppSelector'
 
 const DrinksPage: FC = () => {
-	const { products, isLoading } = useAppSelector((state) => state.products)
-	const { getProducts, addProductToCart } = useAppDispatch()
+   const { products, isLoading } = useAppSelector((state) => state.products)
+   const { getProducts, addProductToCart } = useAppDispatch()
 
-	// const onAddHandler = (product: Product, count: number) => {
-	//    setIsModalActive(true)
-	//    setProductModalProps(product)
-	//    addProductToCart({ product, count })
-	// }
-	useEffect(() => {
-		getProducts(ProductsTypes.DRINKS)
-	}, [getProducts])
+   const onAddHandler = (product: Product, count: number) => {
+      addProductToCart({ product, count })
+   }
 
-	return (
-		<>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<PageContainer title='Drinks'>
-					{products.map((product) => {
-						return (
-							<ProductCard
-								// shouldShowModal={true}
-								onAdd={(product: Product, count: number) => addProductToCart({ product, count })}
-								img={product.img}
-								price={product.price[0][Object.keys(product.price[0])[0]]}
-								ingradients={product.ingradients}
-								name={product.name}
-								id={product.id}
-								key={product.id}
-							/>
-						)
-					})}
-				</PageContainer>
-			)}
-		</>
-	)
+   useEffect(() => {
+      getProducts(ProductsTypes.DRINKS)
+   }, [getProducts])
+
+   return (
+      <>
+         {isLoading ? (
+            <Loader />
+         ) : (
+            <PageContainer title='Drinks'>
+               {products.map((product) => {
+                  const [text, price] = Object.entries(product.price[0])[0]
+                  return (
+                     <ProductCard
+                        onAdd={onAddHandler}
+                        img={product.img}
+                        price={price}
+                        ingradients={product.ingradients}
+                        name={product.name + ' ' + text}
+                        id={product.id}
+                        key={product.id}
+                     />
+                  )
+               })}
+            </PageContainer>
+         )}
+      </>
+   )
 }
 
 export default DrinksPage

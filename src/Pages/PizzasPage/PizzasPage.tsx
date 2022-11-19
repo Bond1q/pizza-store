@@ -8,75 +8,74 @@ import { useAppDispatch } from '../../utils/hooks/useAppDispatch'
 import { useAppSelector } from '../../utils/hooks/useAppSelector'
 import ProductModal from '../../Components/Product/ProductModal/ProductModal'
 
-// import { setProd } from '../../store/actionCreators/productsAction'
 const PizzasPage: FC = () => {
-	const { isLoading, products } = useAppSelector((state) => state.products)
-	const { getProducts, addProductToCart } = useAppDispatch()
+   const { isLoading, products } = useAppSelector((state) => state.products)
+   const { getProducts, addProductToCart } = useAppDispatch()
 
-	const [isModalActive, setIsModalActive] = useState(false)
-	const [productModalProps, setProductModalProps] = useState<ProductFromDB>({
-		ingradients: [],
-		img: '',
-		id: '',
-		name: '',
-		price: [],
-	})
+   const [isModalActive, setIsModalActive] = useState(false)
+   const [productModalProps, setProductModalProps] = useState<ProductFromDB>({
+      ingradients: [],
+      img: '',
+      id: '',
+      name: '',
+      price: [],
+   })
 
-	const onAddHandlerToPoductCard = (product: Product, count: number) => {
-		setIsModalActive(true)
-		setProductModalProps(products.filter(el => el.id === product.id)[0])
-		addProductToCart({ product, count })
-	}
+   const onAddHandlerToPoductCard = (product: Product) => {
+      setIsModalActive(true)
+      setProductModalProps(products.filter((el) => el.id === product.id)[0])
+   }
 
-	// const onAddHandlerToPoductModal = (product: Product, count: number) => {
-	// 	setIsModalActive(false)
-	// 	// setProductModalProps(product)
-	// 	addProductToCart({ product, count })
-	// }
+   const onAddHandlerToPoductModal = (text: string, price: number) => {
+      setIsModalActive(false)
+      const product: Product = {
+         name: productModalProps.name + ' ' + text,
+         price: price,
+         img: productModalProps.img,
+         id: productModalProps.id + parseFloat(text),
+      }
+      addProductToCart({ product, count: 1 })
+   }
 
+   useEffect(() => {
+      getProducts(ProductsTypes.PIZZAS)
+   }, [getProducts])
 
-	useEffect(() => {
-		getProducts(ProductsTypes.PIZZAS)
-	}, [getProducts])
-	// useEffect(() => {
-	// 	setProd()
-	// }, [])
-
-	return (
-		<>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<PageContainer title='Pizzas'>
-					{products.map((product) => {
-						return (
-							<ProductCard
-								onAdd={onAddHandlerToPoductCard}
-								img={product.img}
-								price={product.price[0]['30 cm']}
-								ingradients={product.ingradients}
-								name={product.name}
-								id={product.id}
-								key={product.id}
-							/>
-						)
-					})}
-				</PageContainer>
-			)}
-			<ProductModal
-				onAdd={() => console.log('s')}
-				setIsProductModalActive={setIsModalActive}
-				isProductModalActive={isModalActive}
-				name={productModalProps.name}
-				ingradients={productModalProps.ingradients}
-				img={productModalProps.img}
-				options={productModalProps.price.map(el => {
-					const [key, value] = Object.entries(el)[0]
-					return { text: key, price: value }
-				})}
-			/>
-		</>
-	)
+   return (
+      <>
+         {isLoading ? (
+            <Loader />
+         ) : (
+            <PageContainer title='Pizzas'>
+               {products.map((product) => {
+                  return (
+                     <ProductCard
+                        onAdd={onAddHandlerToPoductCard}
+                        img={product.img}
+                        price={product.price[0]['30 cm']}
+                        ingradients={product.ingradients}
+                        name={product.name}
+                        id={product.id}
+                        key={product.id}
+                     />
+                  )
+               })}
+            </PageContainer>
+         )}
+         <ProductModal
+            onAdd={onAddHandlerToPoductModal}
+            setIsProductModalActive={setIsModalActive}
+            isProductModalActive={isModalActive}
+            name={productModalProps.name}
+            ingradients={productModalProps.ingradients}
+            img={productModalProps.img}
+            options={productModalProps.price.map((el) => {
+               const [key, value] = Object.entries(el)[0]
+               return { text: key, price: value }
+            })}
+         />
+      </>
+   )
 }
 
 export default PizzasPage

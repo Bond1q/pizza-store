@@ -141,3 +141,36 @@
 		width: 400px;
 	}
 }
+
+@media screen and (max-width: 1000px) {
+	.productModal {
+		border-radius: 5px;
+		padding: 20px;
+		padding-top: 70px;
+		width: calc(100% - 115px);
+		width: 90vw;
+		box-sizing: border-box;
+
+		.main {
+			flex-direction: column;
+
+			.info {
+				padding: 20px 20px 0 20px;
+			}
+		}
+
+		.addProduct {
+			padding: 7px 33px;
+
+			margin: 0 auto;
+			margin-top: 20px;
+
+
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+}

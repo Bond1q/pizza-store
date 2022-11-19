@@ -18,13 +18,9 @@
 		align-items: center;
 		justify-content: center;
 		position: relative;
-		// padding: 50px;
 		min-height: 150px;
 		min-width: 300px;
 		background: #ffffff;
-		// border-radius: 20px;
-		// font-size: 32px;
-		// font-weight: 500;
 		transform: scale(0.5);
 		transition: 300ms all;
 		color: #202020;
@@ -46,6 +42,5 @@
 
 .modalActive {
 	opacity: 1;
-	// background: rgba(0, 0, 0, 0.5);
 	pointer-events: all;
 }
